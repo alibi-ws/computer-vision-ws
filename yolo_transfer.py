@@ -68,6 +68,7 @@ os.makedirs('/kaggle/working/val/labels', exist_ok=True)
 train, val = train_test_split(all_images, test_size=0.2, random_state=42,
                               shuffle=True)
 
+# Copy images and labels in new directories for yolo model
 for img in train:
   shutil.copy(images_new_dir+'/'+img, '/kaggle/working/train/images')
   shutil.copy(output_dir+'/'+img.split('.')[0]+'.txt', '/kaggle/working/train/labels')
@@ -76,6 +77,7 @@ for img in val:
   shutil.copy(images_new_dir+'/'+img, '/kaggle/working/val/images')
   shutil.copy(output_dir+'/'+img.split('.')[0]+'.txt', '/kaggle/working/val/labels')
 
+# Create yaml file for yolo training
 yaml_content = '''
 train: /kaggle/working/train/images
 val: /kaggle/working/val/images
